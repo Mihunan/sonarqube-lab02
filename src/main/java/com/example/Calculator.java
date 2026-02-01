@@ -32,7 +32,11 @@ public class Calculator {
         } else { 
             return 0; 
         } 
+    
     } 
+    public int addAgain(int a, int b) { 
+    return a + b; 
+} 
 
     // Code Duplication (students must remove)
     public int addNumbers(int x, int y) {
@@ -42,8 +46,4 @@ public class Calculator {
     public int sumValues(int a, int b) {
         return a + b;
     }
-
-    public int addAgain(int a, int b) { 
-return a + b; 
-} 
 }
