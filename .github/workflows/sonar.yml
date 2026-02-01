@@ -43,3 +43,4 @@ jobs:
             -Dsonar.projectKey=mihunanv214134h_lab2 \
             -Dsonar.organization=MihunanV214134H \
             -Dsonar.host.url=https://sonarcloud.io
+            
