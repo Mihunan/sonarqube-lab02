@@ -24,6 +24,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Verify Java installation
+        run: |
+          java -version
+          mvn -version
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:
@@ -32,14 +37,29 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Build with Maven
-        run: mvn -B verify
+        run: mvn -B clean compile
+        
+      - name: Run tests
+        run: mvn -B test
+
+      - name: Display project structure
+        run: |
+          echo "Project structure:"
+          find . -name "*.java" | head -20
+          echo "POM file:"
+          cat pom.xml | head -50
 
       - name: SonarCloud Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          echo "Running SonarQube analysis..."
+          echo "Project Key: mihunan"
+          echo "Organization Key: mihunan214134h"
+          
           mvn sonar:sonar \
             -Dsonar.projectKey=mihunan \
             -Dsonar.organization=mihunan214134h \
-            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.verbose=true
