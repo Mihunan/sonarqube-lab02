@@ -7,9 +7,20 @@ import java.sql.SQLException;
 
 public class UserService {
 
-    private static final String DB_URL = "jdbc:mysql://localhost/db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "password";
+    private static final String DB_URL;
+    private static final String DB_USER;
+    private static final String DB_PASSWORD;
+
+    static {
+        DB_URL = System.getenv("DB_URL");
+        DB_USER = System.getenv("DB_USER");
+        DB_PASSWORD = System.getenv("DB_PASSWORD");
+
+        if (DB_URL == null || DB_USER == null || DB_PASSWORD == null) {
+            throw new IllegalStateException(
+                "Database environment variables (DB_URL, DB_USER, DB_PASSWORD) must be set");
+        }
+    }
 
     public void findUser(String username) throws SQLException {
 
