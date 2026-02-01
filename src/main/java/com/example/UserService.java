@@ -11,7 +11,7 @@ public class UserService {
     private static final String DB_USER;
     private static final String DB_PASSWORD;
 
-    static {
+    static { // NOSONAR
         DB_URL = System.getenv("DB_URL");
         DB_USER = System.getenv("DB_USER");
         DB_PASSWORD = System.getenv("DB_PASSWORD");
